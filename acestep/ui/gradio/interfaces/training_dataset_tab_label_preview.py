@@ -4,7 +4,14 @@ from __future__ import annotations
 
 import gradio as gr
 
+from acestep.constants import VALID_LANGUAGES
 from acestep.ui.gradio.i18n import t
+
+# "instrumental" is a dataset-builder marker rather than a language: scan.py
+# reads it as the signal to keep is_instrumental set. It is offered alongside
+# every code the model accepts, instead of the hardcoded subset that previously
+# omitted 'hi' and 'pa' and so made those languages unselectable.
+DATASET_LANGUAGE_CHOICES = ["instrumental", *VALID_LANGUAGES]
 
 
 def build_dataset_label_and_preview_controls() -> dict[str, object]:
@@ -123,19 +130,7 @@ def build_dataset_label_and_preview_controls() -> dict[str, object]:
 
             with gr.Row():
                 edit_language = gr.Dropdown(
-                    choices=[
-                        "instrumental",
-                        "en",
-                        "zh",
-                        "ja",
-                        "ko",
-                        "es",
-                        "fr",
-                        "de",
-                        "pt",
-                        "ru",
-                        "unknown",
-                    ],
+                    choices=DATASET_LANGUAGE_CHOICES,
                     value="instrumental",
                     label=t("training.language"),
                 )
