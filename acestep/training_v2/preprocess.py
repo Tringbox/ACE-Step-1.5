@@ -297,6 +297,10 @@ def _pass1_light(
                             "keyscale": sm.get("keyscale", ""),
                             "timesignature": sm.get("timesignature", ""),
                             "genre": sm.get("genre", ""),
+                            # Recorded so the language baked into the lyric
+                            # prompt header can be audited after the fact, as
+                            # the v1 pipeline already does.
+                            "language": sm.get("language", "unknown"),
                             "is_instrumental": sm.get("is_instrumental", True),
                             "custom_tag": sm.get("custom_tag", ""),
                             "prompt_override": sm.get("prompt_override"),
